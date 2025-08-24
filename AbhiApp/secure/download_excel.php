@@ -11,6 +11,8 @@ use OpenSpout\Common\Entity\Style\Style;
 use OpenSpout\Common\Entity\Style\Color;
 use OpenSpout\Common\Entity\Row;
 use OpenSpout\Common\Entity\Cell;
+use OpenSpout\Common\Entity\Style\Border;
+use OpenSpout\Common\Entity\Style\BorderPart;
 
 // ─────────────────────────────────────────────────────────────
 // Input Validation
@@ -73,11 +75,21 @@ try {
     $writer->openToBrowser('temperature_data.xlsx');
 
     // Header Row
+    // Define border parts
+        $borderTop = new BorderPart(Border::TOP);
+        $borderBottom = new BorderPart(Border::BOTTOM);
+        $borderLeft = new BorderPart(Border::LEFT);
+        $borderRight = new BorderPart(Border::RIGHT);
+
+        // Create full border
+        $fullBorder = new Border($borderTop, $borderBottom, $borderLeft, $borderRight);
+
     // Define grey header style
         $headerStyle = (new Style())
-            ->setBackgroundColor(Color::LIGHT_BLUE)
+            ->setBackgroundColor(Color::LIGHT_GREY)
             ->setFontColor(Color::BLACK)
-            ->setFontBold();
+            ->setFontBold()
+            ->setBorder($fullBorder);// Add border to header style
 
     $header = ['Date'];
     $hcells = [Cell::fromValue($header[0], $headerStyle)];
@@ -88,12 +100,14 @@ try {
     $writer->addRow(new Row($hcells));
 
     // Styles
-    $hotStyle = (new Style())
+   $hotStyle = (new Style())
         ->setBackgroundColor(Color::RED)
-        ->setFontColor(Color::WHITE);
+        ->setFontColor(Color::WHITE)
+        ->setBorder($fullBorder);      // Add border to hot style
        
 
-    $defaultStyle = new Style();
+    $defaultStyle = (new Style())
+        ->setBorder($fullBorder);// Add border to default style
 
     // ─────────────────────────────────────────────────────────
     // Write Data Rows
