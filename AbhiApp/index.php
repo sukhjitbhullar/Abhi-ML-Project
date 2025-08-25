@@ -21,6 +21,7 @@ function resolveRoute(string $route): string {
         'authorize'   => BASE_PATH . '/secure/authorize.php',
         'register'    => BASE_PATH . '/secure/user_register.php',
         'issue_token' => BASE_PATH . '/secure/issue-token.php',
+        'token'       => BASE_PATH . '/secure/token.php',
         'dashboard'   => BASE_PATH . '/secure/dashboard.php',
         'logout'      => BASE_PATH . '/secure/logout.php',
         'fetch_cities' => BASE_PATH . '/secure/fetch_cities.php',

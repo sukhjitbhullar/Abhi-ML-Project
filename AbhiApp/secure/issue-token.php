@@ -50,7 +50,7 @@ $options = [
 $context = stream_context_create($options);
 
 // 5. Send request to token endpoint
-$tokenEndpoint = BASE_URL . '/token.php'; //  Environment-aware
+$tokenEndpoint = route('token'); //  No full path as BASE_URL is included in route()
 
 $response = file_get_contents($tokenEndpoint, false, $context);
 $response = trim($response);
