@@ -212,18 +212,22 @@ function handleLogout() {
 
 // Excel Download
 function downloadExcel() {
-  submitDownloadForm(`${BASE_URL}/index.php?route=download_excel`);
+   submitDownloadForm(`${BASE_URL}/index.php?route=download_excel`);
 }
 
 // JSON Download
 function downloadJson() {
-  submitDownloadForm(`${BASE_URL}/index.php?route=download_json`);
+    submitDownloadForm(`${BASE_URL}/index.php?route=download_json`);
 }
 // Helper to submit form for downloads
 function submitDownloadForm(actionUrl) {
   const cityId = document.getElementById('citySelect').value;
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;
+  if (!cityId || !startDate || !endDate) {
+    alert("Please select city and date range first.");
+    return;
+  }
 
   const form = document.createElement('form');
   form.method = 'POST';
