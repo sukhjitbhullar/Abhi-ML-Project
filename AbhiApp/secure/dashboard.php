@@ -11,7 +11,10 @@ $accessToken = $_SESSION['access_token'] ?? '';
 $tokenExpiry = $_SESSION['token_expires'] ?? 0;
 
 if (! $accessToken || time() >= $tokenExpiry) {
-    header('Location: ' . BASE_URL . '/index.php');
+      echo "<script>
+                      alert('Unauthorized Access ! Invalid or expired token');
+                      window.location.href = '" . BASE_URL . "/index.php';
+              </script>";    
     exit;
 }
 
@@ -22,7 +25,11 @@ $tokenRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (! $tokenRow) {
     http_response_code(403);
-    echo json_encode(["error" => "Unauthorized Access – Invalid or expired token"]);
+    //echo json_encode(["error" => "Unauthorized Access ! Invalid or expired token"]);
+    echo "<script>
+                    alert('Unauthorized Access ! Invalid or expired token');
+                    window.location.href = '" . BASE_URL . "/index.php';
+            </script>";
     exit;
 }
 

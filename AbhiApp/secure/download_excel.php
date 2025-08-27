@@ -1,11 +1,42 @@
 <?php
-
 declare(strict_types=1);
 require_once __DIR__ . '/config.php'; // Adjust path based on file location
 require __DIR__ . '/../../vendor/autoload.php';
-
 require_once __DIR__ . '/myTempdb.php';// Database connection
+require_once __DIR__ . '/oauthDB.php';
 
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+session_start();
+// 1. Validate session token
+$accessToken = $_SESSION['access_token'] ?? '';
+$tokenExpiry = $_SESSION['token_expires'] ?? 0;
+
+if (! $accessToken || time() >= $tokenExpiry) {
+     echo "<script>
+                    alert('Unauthorized Access ! Invalid or expired token');
+                    window.location.href = '" . BASE_URL . "/index.php';
+            </script>";
+    
+    exit;
+}
+
+// 2. Validate token in DB
+$stmt = $pdo_user->prepare("SELECT user_id FROM access_tokens WHERE token = ? AND expires_at > NOW()");
+$stmt->execute([$accessToken]);
+$tokenRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (! $tokenRow) {
+    http_response_code(403);
+    //echo json_encode(["error" => "Unauthorized Access ! Invalid or expired token"]);
+    echo "<script>
+                    alert('Unauthorized Access ! Invalid or expired token');
+                    window.location.href = '" . BASE_URL . "/index.php';
+            </script>";
+    exit;
+}
+// After autnrication, proceed to export data
+// Use OpenSpout to generate XLSX
 use OpenSpout\Writer\XLSX\Writer;
 use OpenSpout\Common\Entity\Style\Style;
 use OpenSpout\Common\Entity\Style\Color;

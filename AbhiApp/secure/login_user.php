@@ -6,8 +6,8 @@ require_once __DIR__ . '/oauthDB.php'; // DB connection
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 
-$error_invalid = "Invalid username or password. Please try again";
-$msg_success   = "Login successful. Redirecting to authorization page...";
+// $error_invalid = "Invalid username or password. Please try again";
+// $msg_success   = "Login successful. Redirecting to authorization page...";
 
 
 // Validate input
@@ -27,12 +27,9 @@ try {
 
     if (!$user || !password_verify($password, $user['password_hash'])) {
         echo "<script>
-                if (confirm('$error_invalid')) {
+                    alert('Invalid username or password. Please try again.');
                     window.location.href = '" . BASE_URL . "/index.php';
-                } else {
-                    alert('You chose to stay.');
-                }
-              </script>";
+                </script>";
         exit;
     }
 
@@ -42,7 +39,10 @@ try {
     $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$client) {
-        echo "No OAuth client configuration found for this user.";
+        echo "<script>
+                    alert('No OAuth client configuration found for this user!Please contact admin.');
+                    window.location.href = '" . BASE_URL . "/index.php';
+                </script>";
         exit;
     }
 
