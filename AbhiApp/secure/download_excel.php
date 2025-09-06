@@ -103,7 +103,7 @@ try {
     // ─────────────────────────────────────────────────────────
 
     $writer = new Writer();
-    $writer->openToBrowser('temperature_data.xlsx');
+    $writer->openToBrowser('Temperature_data.xlsx');
 
     // Header Row
     // Define border parts
