@@ -34,7 +34,8 @@ require_once __DIR__.'/router.php'; // Include routing functions
         </form>
 
         <div class="mt-3 text-center">
-          <small>New user? <a href="<?php echo route('register'); ?>">Register here</a></small>
+          <small>New user? <a href="<?php echo route('register'); ?>">Register here</a><br>
+        <a href="<?= route('forgot_password') ?>">Forgot your password?</a></small>
         </div>
       </div>
     </div>

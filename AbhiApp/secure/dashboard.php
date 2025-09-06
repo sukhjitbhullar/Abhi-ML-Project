@@ -41,7 +41,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (! $user) {
     http_response_code(404);
-    echo json_encode(["error" => "User not found"]);
+    //echo json_encode(["error" => "User not found"]);
+    echo "<script>
+                    alert('User not found');
+                    window.location.href = '" . BASE_URL . "/index.php';
+          </script>";
     exit;
 }
 
@@ -69,8 +73,8 @@ $userEmail = $user['email'] ?? 'test@test.com';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-
-<h1 class="center-heading">Temperature Dashboard</h1>
+<h1 class="center-heading">Abhitej's Machine Learning Project</h1>
+<h2 class="center-heading">Temperature Dashboard</h2>
 
 <div class="user-panel">
   <div class="user-info">

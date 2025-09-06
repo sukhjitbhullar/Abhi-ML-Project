@@ -28,6 +28,10 @@ function resolveRoute(string $route): string {
         'fetch_temperature' => BASE_PATH . '/secure/fetch_temperature.php',
         'download_excel' => BASE_PATH . '/secure/download_excel.php',
         'download_json' => BASE_PATH . '/secure/download_json.php',
+        'forgot_password' => BASE_PATH . '/secure/forgot_password.php',
+        'send_reset' => BASE_PATH . '/secure/send_reset.php',
+        'reset_password' => BASE_PATH . '/secure/reset_password.php',
+        'update_password' => BASE_PATH . '/secure/update_password.php'
 
     ];
 
