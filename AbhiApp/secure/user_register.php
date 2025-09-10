@@ -40,7 +40,7 @@ require_once __DIR__ . '/router.php'; // Include routing functions
         </form>
 
         <div class="mt-3 text-center">
-          <small>Already registered? <a href="<?php echo BASE_URL.'/index.php/route='; ?>">Login here</a></small>
+          <small>Already registered? <a href="<?php echo BASE_URL.'/index.php/route=login'; ?>">Login here</a></small>
         </div>
       </div>
     </div>

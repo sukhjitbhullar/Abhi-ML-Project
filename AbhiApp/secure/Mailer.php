@@ -17,7 +17,7 @@ class Mailer {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom($_ENV['SMTP_USER'], 'Dashboard Bot');
+            $mail->setFrom($_ENV['SMTP_USER'], 'Abhitej ML Project');
             $mail->addAddress($to);
             $mail->Subject = $subject;
             $mail->Body = $body;

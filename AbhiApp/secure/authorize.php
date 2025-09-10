@@ -42,7 +42,7 @@ $query = http_build_query([
 ]);
 
 //echo "Authorization successful. Redirecting to Client Callback...";
-header("Location: " . route('issue_token') . '&' . $query);
+header("Location: " . route('issue_token') . '?&' . $query);
 
 exit;
 ?>

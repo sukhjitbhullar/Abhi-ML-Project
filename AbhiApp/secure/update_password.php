@@ -28,7 +28,7 @@ $email = $reset['email'];
 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
 // Update password
-$stmt = $pdo_user->prepare("UPDATE users SET password = ? WHERE email = ?");
+$stmt = $pdo_user->prepare("UPDATE users SET password_hash = ? WHERE email = ?");
 $stmt->execute([$hashedPassword, $email]);
 
 // Clean up token
